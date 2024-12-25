@@ -2,8 +2,6 @@
     font-family: quoteFont;
     src: url('font.zip');
 }
-
-
 html,body{
     background-color: #cdcfc0;
     display: flex;
@@ -50,5 +48,9 @@ html,body{
 .quote_text{
     font-family: "Cedarville Cursive", serif;
     font-weight: 400;
+    font-size: 40px;
     font-style: normal;
+    position: relative;
+    right: 200px;
+
 }
