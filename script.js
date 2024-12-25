@@ -1,41 +1,33 @@
-async function getQuote() {
-    const url = 'https://quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com/quote?token=ipworld.info';
-    const options = {
-        method: "GET",
-        headers: {
-            'x-rapidapi-key': '5c56749bb7msh7821f666f6ec6a6p15f5d2jsn8efce2933aeb',
-            'x-rapidapi-host': 'quotes-inspirational-quotes-motivational-quotes.p.rapidapi.com'
-        }
-    };
-
-    try {
-        const response = await fetch(url, options);
-        if (!response.ok) {
-            console.error("Failed to fetch the data");
-            return;
-        }
-        const data = await response.json();
-        displayQuote(data.text); // Pass the quote text to the display function
-    } catch (error) {
-        console.error("Error:", error);
-    }
-}
-
-function displayQuote(quoteText) {
-    const quoteElement = document.getElementById('quote');
-    quoteElement.innerHTML = ""; // Clear previous content
-    let index = 0;
-
-    const interval = setInterval(() => {
-        quoteElement.innerHTML += quoteText[index]; // Append one character at a time
-        index++;
-
-        if (index === quoteText.length) {
-            clearInterval(interval);
-            setTimeout(getQuote, 2000); // Fetch a new quote after a 2-second pause
-        }
-    }, 50);
-}
-
-// Call the function initially
-getQuote();
+let quote = [
+       `"It takes courage to grow up and become 
+              who you really are."`, 
+   
+       `"Nothing is impossible."`, 
+   
+       `"You have brains in your head. You have feet in your shoes. 
+              You can steer yourself any direction you choose."`,
+   
+       `"Attitude is a little thing that makes a big difference."`
+   ];
+   
+   function display_quote() {
+       let index = 0; 
+       let quote_for_the_day = quote[Math.floor(Math.random() * quote.length)];
+       let quoteElement = document.getElementById("quote");
+   
+       quoteElement.innerHTML = ""; // Clear previous quote
+       const interval = setInterval(() => {
+           if (index < quote_for_the_day.length) {
+               quoteElement.innerHTML += quote_for_the_day[index] === "\n"
+                   ? "<br>" // Replace line breaks with HTML `<br>` tags
+                   : quote_for_the_day[index];
+               index++;
+           } else {
+               clearInterval(interval);
+               setTimeout(display_quote, 2000); // Show the next quote after a delay
+           }
+       }, 50);
+   }
+   
+   display_quote();
+   
